@@ -564,17 +564,31 @@ footer {
 .wheel-arc {
   position: absolute;
   aspect-ratio: 1;
-  translate: -50% -50%;
   border-radius: 50%;
-  background: conic-gradient(from -30deg, var(--paper) 60deg, transparent 60deg);
-  mask-image: radial-gradient(farthest-side, transparent calc(100% - var(--line)),
-    var(--paper) calc(100% - var(--line)));
+  transform: translate(-50%, -50%);
 }
+/* 轮毂上一个跟着转的小光点，比整圈弧更干净 */
+.wheel-arc::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  width: 30%;
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: var(--paper);
+}
+/* 板车轮圈本身是白的，光点用深紫才看得见 */
+.cart .wheel-arc::before { background: var(--ink); }
 .running .wheel-arc {
   will-change: transform;
   animation: spin-wheel var(--wheel-period) linear infinite;
 }
-@keyframes spin-wheel { to { transform: rotate(1turn); } }
+@keyframes spin-wheel {
+  from { transform: translate(-50%, -50%) rotate(0turn); }
+  to { transform: translate(-50%, -50%) rotate(1turn); }
+}
 
 /* 板车轮胎是奶油色，白弧看不见：换成深紫弧线 */
 
