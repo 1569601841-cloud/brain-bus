@@ -663,9 +663,13 @@ footer {
 .vehicle-puff:nth-child(2) { --puff-delay: var(--puff-stagger); }
 .vehicle-puff:nth-child(3) { --puff-delay: calc(2 * var(--puff-stagger)); }
 @keyframes drift-puff {
-  from { width: var(--puff-start); transform: translate(0, 0); opacity: var(--puff-opacity, 1); }
-  to { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)); opacity: 0; }
+  /* 出生淡入、消失提前到 85%：球在完全透明之后才重置，避免"重生"那一帧露出大球 */
+  0% { width: var(--puff-start); transform: translate(0, 0); opacity: 0; }
+  12% { opacity: var(--puff-opacity, 1); }
+  85% { opacity: 0; }
+  100% { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)); opacity: 0; }
 }
+.vehicle-puff { will-change: width, transform, opacity; }
 
 .cart-bell, .trike-ribbon {
   position: absolute;
