@@ -1082,12 +1082,13 @@ form input::placeholder { color: var(--muted); }
   text-align: center;
 }
 .start-logo {
-  width: 150px;
+  width: 132px;
   height: auto;
+  margin-top: 36px;
   image-rendering: pixelated;
 }
 .start-title {
-  margin: 20px 0 0;
+  margin: 0;
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 6px;
@@ -1122,7 +1123,7 @@ form input::placeholder { color: var(--muted); }
   box-shadow: none;
 }
 @media (min-width: 651px) {
-  .start-logo { width: 212px; }
+  .start-logo { width: 168px; }
   .start-title { font-size: 44px; letter-spacing: 8px; text-indent: 8px; }
   .start-copy { line-height: 2; }
   .start-button { min-width: 210px; height: 60px; }
