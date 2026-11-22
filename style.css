@@ -663,13 +663,12 @@ footer {
 .vehicle-puff:nth-child(2) { --puff-delay: var(--puff-stagger); }
 .vehicle-puff:nth-child(3) { --puff-delay: calc(2 * var(--puff-stagger)); }
 @keyframes drift-puff {
-  /* 出生淡入、消失提前到 85%：球在完全透明之后才重置，避免"重生"那一帧露出大球 */
-  0% { width: var(--puff-start); transform: translate(0, 0); opacity: 0; }
-  12% { opacity: var(--puff-opacity, 1); }
+  /* 出生时同时用 scale 压到 20%：即使某一帧没吃到透明度，也只是一个几乎看不见的小点 */
+  0% { width: var(--puff-start); transform: translate(0, 0) scale(0.2); opacity: 0; }
+  15% { opacity: var(--puff-opacity, 1); }
   85% { opacity: 0; }
-  100% { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)); opacity: 0; }
+  100% { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)) scale(1); opacity: 0; }
 }
-.vehicle-puff { will-change: width, transform, opacity; }
 
 .cart-bell, .trike-ribbon {
   position: absolute;
