@@ -1069,7 +1069,7 @@ form input::placeholder { color: var(--muted); }
   clip-path: inset(var(--mask-top) 0 0 0);
 }
 
-/* 开始屏：一个 logo + 一个开始按钮，点击后直接进入应用 */
+/* 开始屏：logo + 标题 + 理念说明 + 开始按钮 */
 .start-screen {
   position: fixed;
   inset: 0;
@@ -1077,22 +1077,37 @@ form input::placeholder { color: var(--muted); }
   display: grid;
   place-content: center;
   justify-items: center;
-  gap: 36px;
   padding: 24px;
   background: var(--paper);
+  text-align: center;
 }
 .start-logo {
-  width: 122px;
+  width: 150px;
   height: auto;
   image-rendering: pixelated;
 }
+.start-title {
+  margin: 20px 0 0;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 6px;
+  text-indent: 6px;
+}
+.start-copy {
+  margin: 18px 0 0;
+  font-size: var(--fs-md);
+  line-height: 1.85;
+  color: var(--muted);
+}
 .start-button {
+  margin-top: 32px;
   min-width: 178px;
   height: 54px;
   padding: 0 30px;
   font-family: inherit;
   font-size: var(--fs-lg);
   letter-spacing: 3px;
+  text-indent: 3px;
   color: var(--ink);
   background: var(--pink);
   border: var(--line-bold) solid var(--ink);
@@ -1107,6 +1122,8 @@ form input::placeholder { color: var(--muted); }
   box-shadow: none;
 }
 @media (min-width: 651px) {
-  .start-logo { width: 152px; }
-  .start-button { min-width: 200px; height: 58px; }
+  .start-logo { width: 212px; }
+  .start-title { font-size: 44px; letter-spacing: 8px; text-indent: 8px; }
+  .start-copy { line-height: 2; }
+  .start-button { min-width: 210px; height: 60px; }
 }
