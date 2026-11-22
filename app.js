@@ -22,6 +22,15 @@ function icon(name) {
   const ws = [180, 160, 140, 150, 140, 155, 155, 164];
   return kitIcon(xs[col], [45, 235, 405][row], ws[col], 170);
 }
+// 座位越多跑得越快：2 座 20s → 20 座 2.5s；锚点取自下面各特殊载具的 period
+const SPEED_ANCHORS = [[2, 20], [4, 16], [6, 12], [10, 10], [14, 7], [17, 5.5], [20, 2.5]];
+function busPeriod(capacity) {
+  for (let i = 1; i < SPEED_ANCHORS.length; i++) {
+    const [c0, p0] = SPEED_ANCHORS[i - 1], [c1, p1] = SPEED_ANCHORS[i];
+    if (capacity <= c1) return p0 + (p1 - p0) * (capacity - c0) / (c1 - c0);
+  }
+  return 2.5;
+}
 const outfits = [
   {id: 'bus', name: '基础巴士', min: 2, max: 20, period: 2.5},
   {id: 'cart', name: '双人板车', min: 2, max: 2, period: 20},
@@ -245,7 +254,7 @@ function brainVehicle(n, preview = false) {
   return `<div class="native-bus${n >= 9 ? ' double-decker' : ''}" data-vehicle="bus" style="${style}">
     <div class="art-crop fleet-shell native-crop">${img}</div>
     <div class="passenger-layer">${preview ? '' : seatedPassengers(windows.slice(0, n), crop)}</div>
-    ${wheelArcs(wheels, crop, outfits[0].period)}
+    ${wheelArcs(wheels, crop, busPeriod(n))}
   </div>`;
 }
 
@@ -312,8 +321,8 @@ const outfitWheels = {
   car: [[93, 130, 37], [402, 130, 37]],
   truck: [[111, 130, 27], [509, 130, 28]],
   train: [
-    ...[142, 374, 609, 867, 1099, 1333].map(x => [x, 296, 37]),
-    [1602, 288, 51], [1713, 288, 51], [1824, 299, 33]
+    ...[57, 145, 235, 337, 422, 510].map(x => [x, 120, 27]),   // 760×131 图实测
+    [615, 118, 27], [657, 118, 27], [700, 122, 24]
   ]
 };
 
@@ -391,7 +400,9 @@ const rect = (x, y, w, h, color) =>
 
 function displayedOutfit() {
   const {outfit, capacity} = state.day;
-  return outfits.find(o => o.id === outfit && capacity >= o.min && capacity <= o.max) || outfits[0];
+  const o = outfits.find(o => o.id === outfit && capacity >= o.min && capacity <= o.max) || outfits[0];
+  // 基础巴士/双层巴士覆盖 2–20 座，速度按当前座位数插值
+  return o.id === 'bus' ? {...o, period: busPeriod(capacity)} : o;
 }
 
 function hasArrived(day) {
