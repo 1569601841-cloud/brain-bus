@@ -1068,3 +1068,45 @@ form input::placeholder { color: var(--muted); }
   image-rendering: pixelated;
   clip-path: inset(var(--mask-top) 0 0 0);
 }
+
+/* 开始屏：一个 logo + 一个开始按钮，点击后直接进入应用 */
+.start-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 36px;
+  padding: 24px;
+  background: var(--paper);
+}
+.start-logo {
+  width: 122px;
+  height: auto;
+  image-rendering: pixelated;
+}
+.start-button {
+  min-width: 178px;
+  height: 54px;
+  padding: 0 30px;
+  font-family: inherit;
+  font-size: var(--fs-lg);
+  letter-spacing: 3px;
+  color: var(--ink);
+  background: var(--pink);
+  border: var(--line-bold) solid var(--ink);
+  border-radius: var(--corner);
+  box-shadow: 0 3px 0 var(--pink-edge);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.start-button:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+@media (min-width: 651px) {
+  .start-logo { width: 152px; }
+  .start-button { min-width: 200px; height: 58px; }
+}
