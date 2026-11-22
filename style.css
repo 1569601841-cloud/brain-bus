@@ -1086,7 +1086,7 @@ form input::placeholder { color: var(--muted); }
   z-index: 2;
   width: 128px;
   height: auto;
-  margin-top: 98px;
+  margin-top: 108px;
   margin-bottom: -18px;
   image-rendering: pixelated;
 }
@@ -1095,15 +1095,14 @@ form input::placeholder { color: var(--muted); }
   color: var(--pink);
   font-size: 36px;
   text-shadow:
-    1px 0 0 var(--ink), -1px 0 0 var(--ink), 0 1px 0 var(--ink), 0 -1px 0 var(--ink),
-    1px 1px 0 var(--ink), -1px 1px 0 var(--ink), 1px -1px 0 var(--ink), -1px -1px 0 var(--ink),
-    3px 4px 0 var(--ink);
+    2px 0 0 var(--ink), -2px 0 0 var(--ink), 0 2px 0 var(--ink), 0 -2px 0 var(--ink),
+    2px 2px 0 var(--ink), -2px 2px 0 var(--ink), 2px -2px 0 var(--ink), -2px -2px 0 var(--ink);
   line-height: 1.2;
   letter-spacing: 8px;
   text-indent: 8px;
 }
 .start-copy {
-  margin: 14px 0 0;
+  margin: 4px 0 0;
   font-size: var(--fs-md);
   line-height: 1.85;
   color: var(--muted);
