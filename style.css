@@ -1077,7 +1077,7 @@ form input::placeholder { color: var(--muted); }
   display: grid;
   place-content: start center;
   justify-items: center;
-  padding: 168px 24px 24px;
+  padding: 148px 24px 24px;
   background: var(--paper);
   text-align: center;
 }
@@ -1086,7 +1086,7 @@ form input::placeholder { color: var(--muted); }
   z-index: 2;
   width: 128px;
   height: auto;
-  margin-top: 108px;
+  margin-top: 116px;
   margin-bottom: -18px;
   image-rendering: pixelated;
 }
@@ -1102,7 +1102,7 @@ form input::placeholder { color: var(--muted); }
   text-indent: 8px;
 }
 .start-copy {
-  margin: 4px 0 0;
+  margin: 16px 0 0;
   font-size: var(--fs-md);
   line-height: 1.85;
   color: var(--muted);
