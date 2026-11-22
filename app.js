@@ -205,10 +205,10 @@ function artPosition(x, y, [left, top, width, height]) {
   return `left:${(x - left) / width * 100}%;top:${(y - top) / height * 100}%`;
 }
 
-function wheelArcs(wheels, crop, period) {
+function wheelArcs(wheels, crop, period, ratio = 0.9) {
   return `<div class="wheel-arcs" aria-hidden="true" style="--wheel-period:calc(${period}s / 3)">
     ${wheels.map(([x, y, diameter]) => `<i class="wheel-arc"
-      style="${artPosition(x, y, crop)};width:${diameter * 0.9 / crop[2] * 100}%"></i>`).join('')}
+      style="${artPosition(x, y, crop)};width:${diameter * ratio / crop[2] * 100}%"></i>`).join('')}
   </div>`;
 }
 
@@ -262,8 +262,8 @@ const outfitArt = {
     // 实测座椅：靠背右缘 56/126/196/262，坐垫上表面 108；人底边压在坐垫上表面
     src: 'assets/fleet/trike.png', size: [380, 191],
     bounds: [0, 0, 380, 191], displayWidth: 128,
-    seats: [[55, 68, 32, 40, 0.2], [125, 68, 32, 40, 0.2],
-      [194, 68, 32, 40, 0.2], [259, 68, 32, 40, 0.2]]
+    seats: [[55, 62, 32, 46, 0.2], [125, 62, 32, 46, 0.2],
+      [194, 62, 32, 46, 0.2], [259, 62, 32, 46, 0.2]]
   },
   car: {
     // 去掉多余车轮的版本，六扇窗坐标已换算
@@ -379,7 +379,7 @@ function otherVehicle(o, capacity, preview = false) {
       outfitSeats(id, art.seats, capacity), localCrop, !!art.clipSeats
     )}</div>
     ${art.mask ? `<div class="vehicle-mask" style="--mask-top:${art.mask * 100}%" aria-hidden="true"><img src="${art.src}" alt=""></div>` : ''}
-    ${outfitWheels[id] ? wheelArcs(outfitWheels[id], detailCrop, o.period) : ''}
+    ${outfitWheels[id] ? wheelArcs(outfitWheels[id], detailCrop, o.period, id === 'cart' ? 0.65 : 0.9) : ''}
     ${outfitDetail(id, detailCrop)}
   </div>`;
 }
