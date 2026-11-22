@@ -616,8 +616,8 @@ footer {
   opacity: 0;
 }
 .train .vehicle-puff {
-  --puff-start: 2.6cqw;
-  --puff-end: 7.2cqw;
+  --puff-start: 3.1cqw;
+  --puff-end: 8.2cqw;
   --drift-x: -5cqw;
   --drift-y: -8cqw;
   --puff-period: 1.6s;
@@ -639,16 +639,16 @@ footer {
 .plane .vehicle-puff:nth-child(2) { --drift-x: -10cqw; }
 .plane .vehicle-puff:nth-child(3) { --drift-x: -13cqw; }
 .truck .vehicle-puff {
-  --puff-start: 2.5cqw;
-  --puff-end: 5.8cqw;
+  --puff-start: 3.0cqw;
+  --puff-end: 6.8cqw;
   --drift-x: -10cqw;
   --drift-y: -6cqw;
   --puff-period: 1.4s;
   --puff-stagger: -0.7s;
 }
 .car .vehicle-puff {
-  --puff-start: 2.7cqw;
-  --puff-end: 6.5cqw;
+  --puff-start: 3.2cqw;
+  --puff-end: 7.4cqw;
   --drift-x: -10.8cqw;
   --drift-y: -6cqw;
   --puff-period: 1.5s;
@@ -663,11 +663,11 @@ footer {
 .vehicle-puff:nth-child(2) { --puff-delay: var(--puff-stagger); }
 .vehicle-puff:nth-child(3) { --puff-delay: calc(2 * var(--puff-stagger)); }
 @keyframes drift-puff {
-  /* 出生时同时用 scale 压到 20%：即使某一帧没吃到透明度，也只是一个几乎看不见的小点 */
-  0% { width: var(--puff-start); transform: translate(0, 0) scale(0.2); opacity: 0; }
-  15% { opacity: var(--puff-opacity, 1); }
-  85% { opacity: 0; }
-  100% { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)) scale(1); opacity: 0; }
+  /* 出生从 0 宽长出来、到最后才淡出：两头都不可见，中间保持满浓度 */
+  0% { width: 0; transform: translate(0, 0); opacity: 0; }
+  8% { width: var(--puff-start); opacity: var(--puff-opacity, 1); }
+  80% { opacity: var(--puff-opacity, 1); }
+  100% { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)); opacity: 0; }
 }
 
 .cart-bell, .trike-ribbon {
