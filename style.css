@@ -633,27 +633,33 @@ footer {
 .running .plane .vehicle-puff { animation: puff-plane 0.55s var(--puff-delay) linear infinite; }
 
 @keyframes puff-train {
-  0% { width: 0; transform: translate(0, 0); opacity: 0; }
-  8% { width: 3cqw; opacity: 1; }
-  70% { opacity: 1; }
+  /* 0–12%：带着上一轮的终点尺寸，在【完全透明】时缩回起点；12% 之后才开始淡入。
+     这样“回到起点”这件事发生在看不见的间隙里，肉眼只会看到起点冒出新烟。 */
+  0% { width: 7.6cqw; transform: translate(-6cqw, -8cqw); opacity: 0; }
+  12% { width: 3cqw; transform: translate(0, 0); opacity: 0; }
+  24% { opacity: 1; }
+  78% { opacity: 1; }
   100% { width: 7.6cqw; transform: translate(-6cqw, -8cqw); opacity: 0; }
 }
 @keyframes puff-truck {
-  0% { width: 0; transform: translate(0, 0); opacity: 0; }
-  8% { width: 2.9cqw; opacity: 1; }
-  70% { opacity: 1; }
+  0% { width: 6.4cqw; transform: translate(-10cqw, -6cqw); opacity: 0; }
+  12% { width: 2.9cqw; transform: translate(0, 0); opacity: 0; }
+  24% { opacity: 1; }
+  78% { opacity: 1; }
   100% { width: 6.4cqw; transform: translate(-10cqw, -6cqw); opacity: 0; }
 }
 @keyframes puff-car {
-  0% { width: 0; transform: translate(0, 0); opacity: 0; }
-  8% { width: 3.1cqw; opacity: 0.75; }
-  70% { opacity: 0.75; }
+  0% { width: 7cqw; transform: translate(-11cqw, -6cqw); opacity: 0; }
+  12% { width: 3.1cqw; transform: translate(0, 0); opacity: 0; }
+  24% { opacity: 0.75; }
+  78% { opacity: 0.75; }
   100% { width: 7cqw; transform: translate(-11cqw, -6cqw); opacity: 0; }
 }
 @keyframes puff-plane {
-  0% { width: 0; transform: translate(0, 0); opacity: 0; }
-  10% { width: 3.4cqw; opacity: 1; }
-  65% { opacity: 1; }
+  0% { width: 1cqw; transform: translate(-13cqw, -0.6cqw); opacity: 0; }
+  10% { width: 3.4cqw; transform: translate(0, 0); opacity: 0; }
+  22% { opacity: 1; }
+  62% { opacity: 1; }
   100% { width: 1cqw; transform: translate(-13cqw, -0.6cqw); opacity: 0; }
 }
 
