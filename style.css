@@ -608,66 +608,53 @@ footer {
 .vehicle-puff {
   position: absolute;
   translate: -50% -50%;
-  width: var(--puff-start);
+  width: 3cqw;
   aspect-ratio: 1;
   border: var(--line) solid var(--ink);
   border-radius: 50%;
   background: var(--paper);
   opacity: 0;
 }
-.train .vehicle-puff {
-  --puff-start: 3.1cqw;
-  --puff-end: 8.2cqw;
-  --drift-x: -5cqw;
-  --drift-y: -8cqw;
-  --puff-period: 1.6s;
-  --puff-stagger: -0.53s;
-}
-.train .vehicle-puff:nth-child(2) { --drift-x: -6.6cqw; --drift-y: -6.2cqw; }
-.train .vehicle-puff:nth-child(3) { --drift-x: -8.2cqw; --drift-y: -9.4cqw; }
-.plane .vehicle-puff {
-  --puff-start: 3.4cqw;
-  --puff-end: 1cqw;
-  --drift-x: -8cqw;
-  --drift-y: -0.6cqw;
-  --puff-period: 0.55s;
-  --puff-stagger: -0.18s;
-  border: 0;
-  /* 白色，由大变小，叠在图片自带的蓝色尾烟上 */
-  background: var(--paper);
-}
-.plane .vehicle-puff:nth-child(2) { --drift-x: -10cqw; }
-.plane .vehicle-puff:nth-child(3) { --drift-x: -13cqw; }
-.truck .vehicle-puff {
-  --puff-start: 3.0cqw;
-  --puff-end: 6.8cqw;
-  --drift-x: -10cqw;
-  --drift-y: -6cqw;
-  --puff-period: 1.4s;
-  --puff-stagger: -0.7s;
-}
-.car .vehicle-puff {
-  --puff-start: 3.2cqw;
-  --puff-end: 7.4cqw;
-  --drift-x: -10.8cqw;
-  --drift-y: -6cqw;
-  --puff-period: 1.5s;
-  --puff-stagger: -0.75s;
-  --puff-opacity: 0.75;
-  border: 0;
-  background: var(--lavender);
-}
-.running .vehicle-puff {
-  animation: drift-puff var(--puff-period) var(--puff-delay, 0s) linear infinite;
-}
-.vehicle-puff:nth-child(2) { --puff-delay: var(--puff-stagger); }
-.vehicle-puff:nth-child(3) { --puff-delay: calc(2 * var(--puff-stagger)); }
-@keyframes drift-puff {
-  /* 出生从 0 宽长出来、到最后才淡出：两头都不可见，中间保持满浓度 */
+/* 每款车一套写死数值的 keyframes：不依赖 var() 插值，Safari 不会在循环重置时漏帧 */
+.train .vehicle-puff { --puff-delay: 0s; }
+.train .vehicle-puff:nth-child(2) { --puff-delay: -0.53s; }
+.train .vehicle-puff:nth-child(3) { --puff-delay: -1.06s; }
+.plane .vehicle-puff { --puff-delay: 0s; border: 0; background: var(--paper); }
+.plane .vehicle-puff:nth-child(2) { --puff-delay: -0.18s; }
+.plane .vehicle-puff:nth-child(3) { --puff-delay: -0.36s; }
+.truck .vehicle-puff { --puff-delay: 0s; }
+.truck .vehicle-puff:nth-child(2) { --puff-delay: -0.7s; }
+.car .vehicle-puff { --puff-delay: 0s; border: 0; background: var(--lavender); }
+.car .vehicle-puff:nth-child(2) { --puff-delay: -0.75s; }
+
+.running .train .vehicle-puff { animation: puff-train 1.6s var(--puff-delay) linear infinite; }
+.running .truck .vehicle-puff { animation: puff-truck 1.4s var(--puff-delay) linear infinite; }
+.running .car .vehicle-puff { animation: puff-car 1.5s var(--puff-delay) linear infinite; }
+.running .plane .vehicle-puff { animation: puff-plane 0.55s var(--puff-delay) linear infinite; }
+
+@keyframes puff-train {
   0% { width: 0; transform: translate(0, 0); opacity: 0; }
-  8% { width: var(--puff-start); opacity: var(--puff-opacity, 1); }
-  80% { opacity: var(--puff-opacity, 1); }
-  100% { width: var(--puff-end); transform: translate(var(--drift-x), var(--drift-y)); opacity: 0; }
+  8% { width: 3cqw; opacity: 1; }
+  70% { opacity: 1; }
+  100% { width: 7.6cqw; transform: translate(-6cqw, -8cqw); opacity: 0; }
+}
+@keyframes puff-truck {
+  0% { width: 0; transform: translate(0, 0); opacity: 0; }
+  8% { width: 2.9cqw; opacity: 1; }
+  70% { opacity: 1; }
+  100% { width: 6.4cqw; transform: translate(-10cqw, -6cqw); opacity: 0; }
+}
+@keyframes puff-car {
+  0% { width: 0; transform: translate(0, 0); opacity: 0; }
+  8% { width: 3.1cqw; opacity: 0.75; }
+  70% { opacity: 0.75; }
+  100% { width: 7cqw; transform: translate(-11cqw, -6cqw); opacity: 0; }
+}
+@keyframes puff-plane {
+  0% { width: 0; transform: translate(0, 0); opacity: 0; }
+  10% { width: 3.4cqw; opacity: 1; }
+  65% { opacity: 1; }
+  100% { width: 1cqw; transform: translate(-13cqw, -0.6cqw); opacity: 0; }
 }
 
 .cart-bell, .trike-ribbon {
