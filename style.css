@@ -1084,11 +1084,12 @@ form input::placeholder { color: var(--muted); }
 .start-logo {
   width: 158px;
   height: auto;
-  margin-top: 54px;
+  margin-top: 30px;
   image-rendering: pixelated;
 }
 .start-title {
   margin: 0;
+  color: #E0709A;
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 6px;
@@ -1101,7 +1102,7 @@ form input::placeholder { color: var(--muted); }
   color: var(--muted);
 }
 .start-button {
-  margin-top: 32px;
+  margin-top: 30px;
   min-width: 178px;
   height: 54px;
   padding: 0 30px;
