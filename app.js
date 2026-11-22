@@ -1,9 +1,11 @@
 const $=id=>document.getElementById(id),M=BusModel,KEY='brain-bus-v3';let state;try{state=JSON.parse(localStorage.getItem(KEY));if(!state||state.version!==3||!Array.isArray(state.day.tasks))state=M.make()}catch{state=M.make()}M.rollover(state);
 let page='assess',draft=state.day.capacity,ratings=[...state.day.ratings],load=1,editId=null;
 const icons={brain:0,bus:1,station:2,drive:3,me:4,wardrobe:5,seat:6,person:7,sleep:8,energy:9,mood:10,speed:11,play:12,pause:13,check:14,warning:15,add:16,edit:17,back:18,close:19,settings:20,mute:21,pin:22,reset:23};
+const KIT_S = 0.3995, KIT_W = 1254 * KIT_S;
 function kitIcon(x, y, w, h, src = 'assets/ui-kit.png') {
+  x *= KIT_S; y *= KIT_S; w *= KIT_S; h *= KIT_S;
   return `<span class="icon" aria-hidden="true"><img src="${src}"
-    style="width:${1254 / w * 100}%;height:${1254 / h * 100}%;left:${-x / w * 100}%;top:${-y / h * 100}%" alt=""></span>`;
+    style="width:${KIT_W / w * 100}%;height:${KIT_W / h * 100}%;left:${-x / w * 100}%;top:${-y / h * 100}%" alt=""></span>`;
 }
 function squareIcon([x, y, w, h], src) {
   const size = Math.max(w, h);
