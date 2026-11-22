@@ -1077,17 +1077,17 @@ form input::placeholder { color: var(--muted); }
   display: grid;
   place-content: center;
   justify-items: center;
-  padding: 52px 24px 24px;
+  padding: 34px 24px 24px;
   background: var(--paper);
   text-align: center;
 }
 .start-logo {
   position: relative;
   z-index: 2;
-  width: 158px;
+  width: 128px;
   height: auto;
-  margin-top: 42px;
-  margin-bottom: -20px;
+  margin-top: 58px;
+  margin-bottom: -18px;
   image-rendering: pixelated;
 }
 .start-title {
@@ -1103,7 +1103,7 @@ form input::placeholder { color: var(--muted); }
   text-indent: 8px;
 }
 .start-copy {
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   font-size: var(--fs-md);
   line-height: 1.85;
   color: var(--muted);
@@ -1131,7 +1131,7 @@ form input::placeholder { color: var(--muted); }
   box-shadow: none;
 }
 @media (min-width: 651px) {
-  .start-logo { width: 200px; }
+  .start-logo { width: 158px; }
   .start-title { font-size: 44px; letter-spacing: 8px; text-indent: 8px; }
   .start-copy { line-height: 2; }
   .start-button { min-width: 210px; height: 60px; }
